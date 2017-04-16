@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <!-- 自动扫描的包名，前端控制器将在指定的包中查找Controller -->
+    <context:component-scan base-package="controller,service" />
+
+    <!-- 访问以下静态资源时不需要经过前端控制器DispatcherServlet -->     
+    <mvc:resources mapping="/resource/**" location="/resource/" />  
+    <!-- 支持MVC注解映射 -->
+    <mvc:annotation-driven />
+    <context:annotation-config />
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	
+	 <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+        
+	
+    <!-- 设定视图解释类 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/> <!-- view的路径  -->
+        <property name="suffix" value=".jsp"/> <!-- view的后缀  -->        
+    </bean>
+
+    <!-- 访问以下静态资源时不需要经过前端控制器DispatcherServlet -->     
+    <mvc:resources mapping="/images/**" location="/images/" />  
+    
+        <!-- apache.dbcp连接池的配置 -->  
+    <bean id="dataSource"  
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+        <property name="driverClassName"  
+            value="com.mysql.jdbc.Driver">  
+        </property>   
+        <property name="url" value="jdbc:mysql://localhost:3306/spring"></property> 
+           <property name="username" value="root"/>  
+          <property name="password" value="123"/>    
+    </bean>  
+	 <!-- jdbc注入 -->  
+    <bean id="jdbcTemplate"  
+        class="org.springframework.jdbc.core.JdbcTemplate">  
+        <property name="dataSource">  
+            <ref bean="dataSource" />  
+        </property>  
+    </bean>  
+		
+
+    <bean id="studentService" class="service.StudentService"/>
+     <bean id="classService" class="service.ClassService"/>
+      <bean id="courseService" class="service.CourseService"/>
+       <bean id="gradeService" class="service.GradeService"/>
+        <bean id="reviewService" class="service.ReviewService"/>
+         <bean id="trainingCourseService" class="service.TrainingCourseService"/>
+          <bean id="trainingService" class="service.TrainingService"/>
+           <bean id="studentPlanService" class="service.StudentPlanService"/>
+</beans>
