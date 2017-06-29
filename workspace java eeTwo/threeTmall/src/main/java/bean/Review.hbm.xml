@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-6-2 17:51:04 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="bean.Review" table="review" catalog="tmall" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="product" class="bean.Product" fetch="select">
+            <column name="pid" />
+        </many-to-one>
+        <many-to-one name="user" class="bean.User" fetch="select">
+            <column name="uid" />
+        </many-to-one>
+        <property name="content" type="string">
+            <column name="content" length="4000" />
+        </property>
+        <property name="createDate" type="timestamp">
+            <column name="createDate" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

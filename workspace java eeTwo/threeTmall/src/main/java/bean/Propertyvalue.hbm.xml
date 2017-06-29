@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-6-2 17:51:04 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="bean.Propertyvalue" table="propertyvalue" catalog="tmall" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="property" class="bean.Property" fetch="select">
+            <column name="ptid" />
+        </many-to-one>
+        <property name="pid" type="java.lang.Integer">
+            <column name="pid" />
+        </property>
+        <property name="value" type="string">
+            <column name="value" />
+        </property>
+    </class>
+</hibernate-mapping>

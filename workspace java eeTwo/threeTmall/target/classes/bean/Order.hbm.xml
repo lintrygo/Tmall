@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-6-2 17:51:04 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="bean.Order" table="order_" catalog="tmall" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="bean.User" fetch="select">
+            <column name="uid" />
+        </many-to-one>
+        <property name="orderCode" type="string">
+            <column name="orderCode" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" />
+        </property>
+        <property name="post" type="string">
+            <column name="post" />
+        </property>
+        <property name="receiver" type="string">
+            <column name="receiver" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="mobile" />
+        </property>
+        <property name="userMessage" type="string">
+            <column name="userMessage" />
+        </property>
+        <property name="createDate" type="timestamp">
+            <column name="createDate" length="19" />
+        </property>
+        <property name="payDate" type="timestamp">
+            <column name="payDate" length="19" />
+        </property>
+        <property name="deliveryDate" type="timestamp">
+            <column name="deliveryDate" length="19" />
+        </property>
+        <property name="confirmDate" type="timestamp">
+            <column name="confirmDate" length="19" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" />
+        </property>
+        <property name="total" type="java.lang.Float">
+            <column name="total" precision="12" scale="0" />
+        </property>
+        <property name="totalNumber" type="java.lang.Integer">
+            <column name="totalNumber" />
+        </property>
+        <set name="orderitems" table="orderitem" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="oid" />
+            </key>
+            <one-to-many class="bean.Orderitem" />
+        </set>
+    </class>
+</hibernate-mapping>
